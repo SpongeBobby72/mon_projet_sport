@@ -1,6 +1,8 @@
 import React from 'react';
-import { ThemeProvider } from "@mui/material";
 import { theme } from "../configs/theme";
+
+import { ThemeProvider } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import AppBar from '@mui/material/AppBar';
 import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
@@ -16,14 +18,25 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
-export default function MainLayout() {
+import { useNavigate } from 'react-router-dom';
+
+const Main = styled("div")(({ theme }) => ({
+    marginTop: 50,
+    display: "flex",
+    alignItems: "center",
+    padding: theme.spacing(0, 1),
+}));
+
+export default function MainLayout({ children }) {
 
     const iconButtonList = [
-        { icon: <EventIcon />, title: 'Calendrier' },
-        { icon: <ChatBubbleOutlineIcon />, title: 'Messagerie' },
-        { icon: <GroupsIcon />, title: 'Equipe' },
-        { icon: <PermIdentityIcon />, title: 'Profil' },
-    ]
+        { icon: <EventIcon />, title: 'Calendrier', link: "calendrier" },
+        { icon: <ChatBubbleOutlineIcon />, title: 'Messagerie', link: "messagerie" },
+        { icon: <GroupsIcon />, title: 'Equipe', link: "equipe" },
+        { icon: <PermIdentityIcon />, title: 'Profil', link: "profil" },
+    ];
+
+    const navigate = useNavigate();
 
     return (
         <ThemeProvider theme={theme}>
@@ -34,9 +47,6 @@ export default function MainLayout() {
                         <Avatar sx={{ bgcolor: "#000", m: 1 }}>
                             <AssignmentIcon />
                         </Avatar>
-                        <Typography variant="h2" sx={{ m: 1 }}>
-                            Calendrier
-                        </Typography>
                     </Box>
                     <IconButton color="icon" sx={{ position: 'absolute', right: 5 }}>
                         <AddCircleOutlineIcon fontSize='large' />
@@ -44,11 +54,14 @@ export default function MainLayout() {
                 </Toolbar>
             </AppBar>
 
+            <Main>{children}</Main>
+
             <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>
                 <Toolbar sx={{ display: 'flex', justifyContent: 'space-around' }}>
                     {iconButtonList.map((value, index) => (
                         <Button
                             key={index}
+                            onClick={() => navigate({ pathname: `/${value.link}` })}
                             sx={{
                                 bgcolor: 'primary.main',
                                 color: '#fff',
