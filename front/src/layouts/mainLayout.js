@@ -21,7 +21,6 @@ import Box from '@mui/material/Box';
 import { useNavigate } from 'react-router-dom';
 
 const Main = styled("div")(({ theme }) => ({
-    marginTop: 50,
     alignItems: "center",
     padding: theme.spacing(0, 1),
 }));
@@ -40,21 +39,7 @@ export default function MainLayout({ children }) {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <AppBar position="fixed" color="primary" sx={{ top: 0, bottom: 'auto' }}>
-                <Toolbar >
-                    <Box>
-                        <Avatar sx={{ bgcolor: "#000", m: 1 }}>
-                            <AssignmentIcon />
-                        </Avatar>
-                    </Box>
-                    <IconButton color="icon" sx={{ position: 'absolute', right: 5 }}>
-                        <AddCircleOutlineIcon fontSize='large' />
-                    </IconButton>
-                </Toolbar>
-            </AppBar>
-
             <Main>{children}</Main>
-
             <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>
                 <Toolbar sx={{ display: 'flex', justifyContent: 'space-around' }}>
                     {iconButtonList.map((value, index) => (
@@ -73,6 +58,16 @@ export default function MainLayout({ children }) {
                             </Typography>
                         </Button>
                     ))}
+                </Toolbar>
+                <Toolbar >
+                    <Box>
+                        <Avatar sx={{ bgcolor: "#000", m: 1 }}>
+                            <AssignmentIcon />
+                        </Avatar>
+                    </Box>
+                    <IconButton color="icon" sx={{ position: 'absolute', right: 5 }}>
+                        <AddCircleOutlineIcon fontSize='large' />
+                    </IconButton>
                 </Toolbar>
             </AppBar>
         </ThemeProvider>
