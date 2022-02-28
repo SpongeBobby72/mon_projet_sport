@@ -22,7 +22,6 @@ import { useNavigate } from 'react-router-dom';
 
 const Main = styled("div")(({ theme }) => ({
     marginTop: 50,
-    display: "flex",
     alignItems: "center",
     padding: theme.spacing(0, 1),
 }));
